@@ -50,7 +50,7 @@
                                         &trans      &mo _FUN_BT    &trans          &trans      &trans      &trans 
                              
             >;
-        }FUN
+        };
 
         // _NUM_NAV
         numbers_and_nav_layer {
