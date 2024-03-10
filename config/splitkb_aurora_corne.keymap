@@ -32,7 +32,7 @@
             &kp LSHFT   &kp A   &kp S   &kp D       &kp F           &kp G           &kp H   &kp J       &kp K       &kp L   &kp SEMI    &kp SQT
             &kp LALT    &kp Z   &kp X   &kp C       &kp V           &kp B           &kp N   &kp M       &kp COMMA   &kp DOT &kp FSLH    &kp ESC
                                         &kp LCTRL   &mo _NUM_NAV    &kp SPACE       &kp RET &mo _DEV    &kp LCMD
-            >
+            >;
         };
         
         // _DEV
@@ -49,7 +49,7 @@
             &trans  &trans      &trans  &trans      &trans      &trans          &kp UNDER   &kp LBKT    &kp RBKT    &kp KP_MULTIPLY &kp BSLH    &kp TILDE
                                         &trans      &mo _FUN_BT    &trans          &trans      &trans      &trans 
                              
-            >
+            >;
         }FUN
 
         // _NUM_NAV
@@ -66,7 +66,7 @@
             &trans  &trans  &kp N7  &kp N8  &kp N9  &kp C_MUTE          &trans      &trans      &trans      &trans      &trans      &trans
                                     &trans  &trans  &trans              &trans      &tog _MAC   &trans 
                              
-            >
+            >;
         };
 
         // _FUN_BT
@@ -82,7 +82,7 @@
             &trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11     &trans       &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &trans
             &trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12     &out OUT_TOG &trans          &trans          &trans          &trans          &trans
                                     &trans  &trans  &trans      &trans       &trans          &trans
-            >
+            >;
         };
 
         // _MAC
@@ -99,7 +99,7 @@
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
                                     &kp LGUI  &trans  &trans    &trans  &trans  &kp LCTRL 
                              
-            >
+            >;
         };
 
         // BLANK TEMPLATE
@@ -116,7 +116,7 @@
         //     &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
         //                             &trans  &trans  &trans      &trans  &trans  &trans 
                              
-        //     >
+        //     >;
         // };
 
     };
