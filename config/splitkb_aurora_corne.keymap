@@ -40,13 +40,13 @@
             // █████████████████████████████████████████████████████████████████████████████████
             // █|     |  !  |  @  |  #  |  $  |  %  |███|  `  |  {  |  }  |  ~  | "|" | DEL   |█
             // █|     |     |     |     |  &  |     |███|  -  |  (  |  )  |  =  |  +  |  ^    |█
-            // █|     |     |     |     |     |     |███|  _  |  [  |  ]  |  *  |  \  |       |█
+            // █|     |     |     |     |     |     |███|  _  |  [  |  ]  |  *  |  \  | ESC   |█
             // ███████████████████|     | FUN |     |███|     |     |     |█████████████████████
             // █████████████████████████████████████████████████████████████████████████████████
             bindings = <
             &trans  &kp EXCL    &kp AT  &kp HASH    &kp DLLR    &kp PRCNT       &kp GRAVE   &kp LBRC    &kp RBRC    &kp TILDE        &kp PIPE    &kp DEL
             &trans  &trans      &trans  &trans      &kp AMPS    &trans          &kp MINUS   &kp LPAR    &kp RPAR    &kp EQUAL       &kp PLUS    &kp CARET
-            &trans  &trans      &trans  &trans      &trans      &trans          &kp UNDER   &kp LBKT    &kp RBKT    &kp KP_MULTIPLY &kp BSLH    &trans
+            &trans  &trans      &trans  &trans      &trans      &trans          &kp UNDER   &kp LBKT    &kp RBKT    &kp KP_MULTIPLY &kp BSLH    &kp ESC
                                         &trans      &mo _FUN_BT &trans          &trans      &trans      &trans 
                              
             >;
