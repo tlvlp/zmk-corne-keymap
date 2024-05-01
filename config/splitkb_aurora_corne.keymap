@@ -87,17 +87,17 @@
 
         // _MAC
         mac_layer {
-            // ███████████████████████████████████████████████████████████████████████████████
-            // █|     |     |     |     |     |     |███|     |     |     |     |     |     |█
-            // █|     |     |     |     |     |     |███|     |     |     |     |     |     |█
-            // █|     |     |     |     |     |     |███|     |     |     |     |     |     |█
-            // ███████████████████|LGUI |     |     |███|     |     |LCTRL|███████████████████
-            // ███████████████████████████████████████████████████████████████████████████████
+            // ██████████████████████████████████████████████████████████████████████████████████████
+            // █|     |     |     |     |     |     |███|     |     |            |     |     |     |█
+            // █|     |     |     |     |     |     |███|     |     |            |     |     |     |█
+            // █|     |     |     |     |     |     |███|     |     |            |     |     |     |█
+            // ███████████████████|LGUI |     |     |███|     |     |LCTRL/L_ NUM|███████████████████
+            // ██████████████████████████████████████████████████████████████████████████████████████
             bindings = <
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-                                    &kp LGUI  &trans  &trans    &trans  &trans  &kp LCTRL 
+                                    &kp LGUI  &trans  &trans    &trans  &trans  &lt _NUM_NAV LCTRL 
                              
             >;
         };
