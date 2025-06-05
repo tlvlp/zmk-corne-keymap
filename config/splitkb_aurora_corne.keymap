@@ -8,15 +8,56 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
 
 // Layer ref
 #define _DEV        1
 #define _NUM_NAV    2
 #define _FUN_BT     3
-#define _MAC        4
+#define _OSX        4
+#define _MOUSE      5
 
 
 / {
+   behaviors {
+        td_cmd_numnav: td_cmd_numnav {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LCMD>, <&mo _NUM_NAV>;
+        };
+        td_ctrl_numnav: td_ctrl_numnav {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LCTRL>, <&mo _NUM_NAV>;
+        };
+        td_dev_mouse: td_dev_mouse {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo _DEV>, <&mo _MOUSE>;
+        };
+    };
+    
+    macros {
+        m_bt_to_layer: macro_bind_bt_to_layer {
+            // Takes two parameters and switches to a BT channel (1) and a layer (2).
+            // eg. `&bt_to_layer 3 0` switches to BT channel 3 and the default layer.
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <2>;
+            bindings
+                = <&macro_param_1to1>
+                , <&bt BT_SEL MACRO_PLACEHOLDER>
+                , <&macro_param_2to1>
+                , <&to MACRO_PLACEHOLDER>
+            ;
+        };
+    };
+    
     keymap {
         compatible = "zmk,keymap";
 
@@ -25,13 +66,13 @@
             // █| TAB |  Q  |  W  |  E  |  R  |  T    |███|  Y  |  U  |  I  |  O  |  P  |BSPC        |█
             // █|LALT |  A  |  S  |  D  |  F  |  G    |███|  H  |  J  |  K  |  L  |  ;: | '"         |█
             // █|LSHFT|  Z  |  X  |  C  |  V  |  B    |███|  N  |  M  |  ,< |  .> |  /? | ESC/RSHIFT |█
-            // ███████████████████|LCTRL| L_NUM |SPACE|███| RET | DEV | CMD/L_ NUM |███████████████████
+            // ███████████████████|LCTRL|L_NUM| SPACE |███| RET | L_DEV/L_MOUSE| CMD/L_NUM |███████████
             // ████████████████████████████████████████████████████████████████████████████████████████
             bindings = <
             &kp TAB     &kp Q   &kp W   &kp E       &kp R           &kp T           &kp Y   &kp U       &kp I       &kp O   &kp P       &kp BSPC
             &kp LALT    &kp A   &kp S   &kp D       &kp F           &kp G           &kp H   &kp J       &kp K       &kp L   &kp SEMI    &kp SQT
             &kp LSHFT   &kp Z   &kp X   &kp C       &kp V           &kp B           &kp N   &kp M       &kp COMMA   &kp DOT &kp FSLH    &mt RSHIFT ESC
-                                        &kp LCTRL   &mo _NUM_NAV    &kp SPACE       &kp RET &mo _DEV    &lt _NUM_NAV LCMD
+                                        &kp LCTRL   &mo _NUM_NAV    &kp SPACE       &kp RET &td_dev_mouse  &td_cmd_numnav
             >;
         };
         
@@ -41,10 +82,10 @@
             // █|     |  !  |  @  |  #  |  $  |  %  |███|  `  |  {  |  }  |  ~  | "|" | DEL   |█
             // █|     |     |     |     |  &  |     |███|  -  |  (  |  )  |  =  |  +  |  ^    |█
             // █|     |     |     |     |     |     |███|  _  |  [  |  ]  |  *  |  \  | ESC   |█
-            // ███████████████████|     | FUN |     |███|     |     |     |█████████████████████
+            // ███████████████████|     |L_FUN|     |███|     |     |     |█████████████████████
             // █████████████████████████████████████████████████████████████████████████████████
             bindings = <
-            &trans  &kp EXCL    &kp AT  &kp HASH    &kp DLLR    &kp PRCNT       &kp GRAVE   &kp LBRC    &kp RBRC    &kp TILDE        &kp PIPE    &kp DEL
+            &trans  &kp EXCL    &kp AT  &kp HASH    &kp DLLR    &kp PRCNT       &kp GRAVE   &kp LBRC    &kp RBRC    &kp TILDE       &kp PIPE    &kp DEL
             &trans  &trans      &trans  &trans      &kp AMPS    &trans          &kp MINUS   &kp LPAR    &kp RPAR    &kp EQUAL       &kp PLUS    &kp CARET
             &trans  &trans      &trans  &trans      &trans      &trans          &kp UNDER   &kp LBKT    &kp RBKT    &kp KP_MULTIPLY &kp BSLH    &kp ESC
                                         &trans      &mo _FUN_BT &trans          &trans      &trans      &trans 
@@ -58,47 +99,63 @@
             // █|      |     |  1  |  2  |  3  |C_VOL_UP|███|PSCRN|HOME | UP  | END |PG_UP|     |█
             // █|      |  0  |  4  |  5  |  6  |C_VOL_DN|███|     |LEFT |DOWN |RIGHT|PG_DN|     |█
             // █|      |     |  7  |  8  |  9  |C_MUTE  |███|     |     |     |     |     | CAPS|█
-            // ████████████████████|     |     |        |███|     | MAC |     |███████████████████
+            // ████████████████████|     |     |        |███|     |L_FUN|     |███████████████████
             // ███████████████████████████████████████████████████████████████████████████████████
             bindings = <
             &trans  &trans  &kp N1  &kp N2  &kp N3  &kp C_VOL_UP        &kp PSCRN   &kp HOME    &kp UP      &kp END     &kp PG_UP   &trans
             &trans  &kp N0  &kp N4  &kp N5  &kp N6  &kp C_VOL_DN        &trans      &kp LEFT    &kp DOWN    &kp RIGHT   &kp PG_DN   &trans
-            &trans  &trans  &kp N7  &kp N8  &kp N9  &kp C_MUTE        &trans      &trans      &trans      &trans      &trans      &kp CAPS
-                                          &trans  &trans  &trans        &trans      &tog _MAC   &trans 
+            &trans  &trans  &kp N7  &kp N8  &kp N9  &kp C_MUTE          &trans      &trans      &trans      &trans      &trans      &kp CAPS
+                                          &trans  &trans  &trans        &trans      &mo _FUN_BT &trans 
                              
             >;
         };
 
         // _FUN_BT
         function_bt_layer {
-            // █████████████████████████████████████████████████████████████████████████████████
-            // █|     |     | F1  | F2  | F3  | F10 |███|BT_CLR |     |     |     |     |     |█
-            // █|     |     | F4  | F5  | F6  | F11 |███|       | BT0 | BT1 | BT2 | BT3 | BT4 |█
-            // █|     |     | F7  | F8  | F9  | F12 |███|OUT_TOG|     |     |     |     |     |█
-            // ███████████████████|     |     |     |███|       |     |     |███████████████████
-            // █████████████████████████████████████████████████████████████████████████████████
+            // ██████████████████████████████████████████████████████████████████████████████████████
+            // █|     |     | F1  | F2  | F3  | F10 |███|       |     |     |         |     |BT_CLR|█
+            // █|     |     | F4  | F5  | F6  | F11 |███|       | BT0 | BT1 | BT2_OSX | BT3 | BT4  |█
+            // █|     |     | F7  | F8  | F9  | F12 |███|OUT_TOG|     |     |         |     |      |█
+            // ███████████████████|     |     |     |███|       |     |     |████████████████████████
+            // ██████████████████████████████████████████████████████████████████████████████████████
             bindings = <
-            &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10     &bt BT_CLR   &trans          &trans          &trans          &trans          &trans
-            &trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11     &trans       &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4
-            &trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12     &out OUT_TOG &trans          &trans          &trans          &trans          &trans
-                                    &trans  &trans  &trans      &trans       &trans          &trans
+            &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10     &trans       &trans              &trans              &trans                 &trans              &bt BT_CLR
+            &trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11     &trans       &m_bt_to_layer 0 0  &m_bt_to_layer 1 0  &m_bt_to_layer 2 _OSX  &m_bt_to_layer 3 0  &m_bt_to_layer 4 0  
+            &trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12     &out OUT_TOG &trans              &trans              &trans                 &trans              &trans
+                                    &trans  &trans  &trans      &trans       &trans              &trans
             >;
         };
 
-        // _MAC
-        mac_layer {
-            // ██████████████████████████████████████████████████████████████████████████████████████
-            // █|     |     |     |     |     |     |███|     |     |            |     |     |     |█
-            // █|     |     |     |     |     |     |███|     |     |            |     |     |     |█
-            // █|     |     |     |     |     |     |███|     |     |            |     |     |     |█
-            // ███████████████████|LGUI |     |     |███|     |     |LCTRL/L_ NUM|███████████████████
-            // ██████████████████████████████████████████████████████████████████████████████████████
+        // _OSX
+        osx_layer {
+            // ███████████████████████████████████████████████████████████████████████████████
+            // █|     |     |     |     |     |     |███|     |     |     |     |     |     |█
+            // █|     |     |     |     |     |     |███|     |     |     |     |     |     |█
+            // █|     |     |     |     |     |     |███|     |     |     |     |     |     |█
+            // ███████████████████|LGUI |     |     |███|     |     |LCTRL/L_NUM |████████████
+            // ███████████████████████████████████████████████████████████████████████████████
             bindings = <
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
             &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-                                    &kp LGUI  &trans  &trans    &trans  &trans  &lt _NUM_NAV LCTRL 
+                                    &kp LGUI  &trans  &trans    &trans  &trans  &td_ctrl_numnav 
                              
+            >;
+        };
+
+        // _MOUSE
+        mouse_layer {
+            // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+            // █|     |     |     |     |     |     |███|     | SCROLL_LEFT | MOVE_UP      | SCROLL_RIGHT | SCROLL_UP   |     |█
+            // █|     |     |     |     |     |     |███|     | MOVE_LEFT   | MOVE_DOWN    | MOVE_RIGHT   | SCROLL_DOWN |     |█
+            // █|     |     |     |     |     |     |███|     | LEFT_CLICK  | MIDDLE_CLICK | RIGHT_CLICK  |             |     |█
+            // ███████████████████|     |     |     |███|     |     |     |█████████████████████████████████████████████████████
+            // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+            bindings = <
+            &trans  &trans  &trans  &trans  &trans  &trans      &none  &msc SCRL_LEFT &mmv MOVE_UP    &msc SCRL_RIGHT &msc SCRL_UP    &none
+            &trans  &trans  &trans  &trans  &trans  &trans      &none  &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &msc SCRL_DOWN  &none
+            &trans  &trans  &trans  &trans  &trans  &trans      &none  &mkp LCLK      &mkp MCLK       &mkp RCLK       &none           &none
+                                    &trans  &trans  &trans      &none  &trans  &none 
             >;
         };
 
@@ -115,7 +172,6 @@
         //     &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
         //     &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
         //                             &trans  &trans  &trans      &trans  &trans  &trans 
-                             
         //     >;
         // };
 
