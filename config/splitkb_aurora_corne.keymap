@@ -8,8 +8,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
 
@@ -47,7 +45,7 @@
         m_bt_to_layer: macro_bind_bt_to_layer {
             // Takes two parameters and switches to a BT channel (1) and a layer (2).
             // eg. `&bt_to_layer 3 0` switches to BT channel 3 and the default layer.
-            compatible = "zmk,behavior-macro";
+            compatible = "zmk,behavior-macro-two-param";
             #binding-cells = <2>;
             bindings
                 = <&macro_param_1to1>
@@ -79,7 +77,7 @@
         // _DEV
         dev_layer {
             // █████████████████████████████████████████████████████████████████████████████████
-            // █|     |  !  |  @  |  #  |  $  |  %  |███|  `  |  {  |  }  |  ~  | "|" | DEL   |█
+            // █|     |  !  |  @  |  #  |  $  |  %  |███|  `  |  {  |  }  |  ~  | '|' | DEL   |█
             // █|     |     |     |     |  &  |     |███|  -  |  (  |  )  |  =  |  +  |  ^    |█
             // █|     |     |     |     |     |     |███|  _  |  [  |  ]  |  *  |  \  | ESC   |█
             // ███████████████████|     |L_FUN|     |███|     |     |     |█████████████████████
