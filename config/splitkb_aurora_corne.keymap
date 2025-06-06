@@ -188,7 +188,7 @@
         };
 
         // _MOUSE_OSX
-        mouse_layer {
+        mouse_osx_layer {
             // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
             // █|     |     |     |     |     |     |███|     | SCROLL_LEFT | MOVE_UP      | SCROLL_RIGHT | SCROLL_DOWN |         |█
             // █|     |     |     |     |     |     |███|     | MOVE_LEFT   | MOVE_DOWN    | MOVE_RIGHT   | SCROLL_UP   |         |█
