@@ -10,20 +10,20 @@
 #include <dt-bindings/zmk/outputs.h>
 
 // Mouse speed configuration
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 1000  // default: 600
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // default: 10
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 800  // default: 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 25    // default: 10
 #include <dt-bindings/zmk/pointing.h>
 
 // Mouse movement acceleration off
 &mmv {
     x-input-code = <INPUT_REL_X>;
     y-input-code = <INPUT_REL_Y>;
-    time-to-max-speed-ms = <0>;
-    acceleration-exponent = <0>;
+    time-to-max-speed-ms = <100>;
+    acceleration-exponent = <1>;
     delay-ms = <0>;
 };
 
-// Mouse scrolling acceleration off
+// Mouse scrolling acceleration offi
 &msc {
     x-input-code = <INPUT_REL_HWHEEL>;
     y-input-code = <INPUT_REL_WHEEL>;
