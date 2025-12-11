@@ -33,12 +33,6 @@
     delay-ms = <0>;
 };
 
-// Override Hold-tap to prefer the tap
-&mt {
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-};
-
 // Layer ref
 #define _DEFAULT    0
 #define _DEV        1
