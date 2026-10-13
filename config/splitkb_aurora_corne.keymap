@@ -11,7 +11,7 @@
 #include <dt-bindings/zmk/behaviors.h>
 
 // Mouse speed configuration
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // default: 600
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 2500  // default: 600
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // default: 10
 #include <dt-bindings/zmk/pointing.h>
 
@@ -19,7 +19,7 @@
 &mmv {
     x-input-code = <INPUT_REL_X>;
     y-input-code = <INPUT_REL_Y>;
-    time-to-max-speed-ms = <250>;
+    time-to-max-speed-ms = <200>;
     acceleration-exponent = <1>;
     delay-ms = <0>;
 };
@@ -69,6 +69,13 @@
             tapping-term-ms = <200>;
             bindings = <&mo _DEV>, <&mo _MOUSE_OSX>, <&to _MOUSE_OSX>;
         };
+
+        td_num_bt: td_num_bt {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo _NUM_NAV>, <&mo _NUM_NAV>, <&to _FUN_BT>;
+        };
     };
     
     macros {
@@ -100,7 +107,7 @@
             &kp TAB     &kp Q   &kp W   &kp E       &kp R           &kp T           &kp Y   &kp U       &kp I       &kp O   &kp P       &kp BSPC
             &kp LALT    &kp A   &kp S   &kp D       &kp F           &kp G           &kp H   &kp J       &kp K       &kp L   &kp SEMI    &kp SQT
             &kp LSHFT   &kp Z   &kp X   &kp C       &kp V           &kp B           &kp N   &kp M       &kp COMMA   &kp DOT &kp FSLH    &mt RSHIFT ESC
-                                        &kp LCTRL   &mo _NUM_NAV    &kp SPACE       &kp RET &td_dev_mouse  &td_cmd_numnav
+                                        &kp LCTRL   &td_num_bt      &kp SPACE       &kp RET &td_dev_mouse  &td_cmd_numnav
             >;
         };
         
@@ -116,7 +123,7 @@
             &trans  &kp EXCL    &kp AT  &kp HASH    &kp DLLR    &kp PRCNT       &kp GRAVE   &kp LBRC    &kp RBRC    &kp TILDE       &kp PIPE    &kp DEL
             &trans  &trans      &trans  &trans      &kp AMPS    &trans          &kp MINUS   &kp LPAR    &kp RPAR    &kp EQUAL       &kp PLUS    &kp CARET
             &trans  &trans      &trans  &trans      &trans      &trans          &kp UNDER   &kp LBKT    &kp RBKT    &kp KP_MULTIPLY &kp BSLH    &kp ESC
-                                        &trans      &mo _FUN_BT &trans          &trans      &trans      &trans 
+                                        &trans      &trans      &trans          &trans      &trans      &trans 
                              
             >;
         };
@@ -133,7 +140,7 @@
             &trans  &trans  &kp N1  &kp N2  &kp N3  &kp C_VOL_UP        &kp PSCRN   &kp HOME    &kp UP      &kp END     &kp PG_UP   &trans
             &trans  &kp N0  &kp N4  &kp N5  &kp N6  &kp C_VOL_DN        &trans      &kp LEFT    &kp DOWN    &kp RIGHT   &kp PG_DN   &trans
             &trans  &trans  &kp N7  &kp N8  &kp N9  &kp C_MUTE          &trans      &trans      &trans      &trans      &trans      &kp CAPS
-                                          &trans  &trans  &trans        &trans      &mo _FUN_BT &trans 
+                                          &trans  &trans  &trans        &trans      &trans      &trans 
                              
             >;
         };
