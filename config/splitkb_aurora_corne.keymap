@@ -148,13 +148,13 @@
         // _FUN_BT
         function_bt_layer {
             // ██████████████████████████████████████████████████████████████████████████████████████
-            // █|     |     | F1  | F2  | F3  | F10 |███|       |     |     |         |     |BT_CLR|█
-            // █|     |     | F4  | F5  | F6  | F11 |███|       | BT0 | BT1 | BT2_OSX | BT3 | BT4  |█
-            // █|     |     | F7  | F8  | F9  | F12 |███|OUT_TOG|     |     |         |     |      |█
-            // ███████████████████|     |     |     |███|       |     |     |████████████████████████
+            // █|     |     | F1  | F2  | F3  | F10 |███|L_DEFAULT|L_OSX|     |         |     |BT_CLR|█
+            // █|     |     | F4  | F5  | F6  | F11 |███|         | BT0 | BT1 | BT2_OSX | BT3 | BT4  |█
+            // █|     |     | F7  | F8  | F9  | F12 |███|OUT_TOG  |     |     |         |     |      |█
+            // ███████████████████|     |     |     |███|         |     |     |████████████████████████
             // ██████████████████████████████████████████████████████████████████████████████████████
             bindings = <
-            &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10     &trans       &trans              &trans              &trans                 &trans              &bt BT_CLR
+            &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10     &to _DEFAULT &to _OSX            &trans              &trans                 &trans              &bt BT_CLR
             &trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11     &trans       &m_bt_to_layer 0 0  &m_bt_to_layer 1 0  &m_bt_to_layer 2 _OSX  &m_bt_to_layer 3 0  &m_bt_to_layer 4 0  
             &trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12     &out OUT_TOG &trans              &trans              &trans                 &trans              &trans
                                     &trans  &trans  &trans      &trans       &trans              &trans
@@ -197,7 +197,7 @@
         // _MOUSE_OSX
         mouse_osx_layer {
             // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-            // █|     |     |     |     |     |     |███|     | SCRL_RIGHT  | MOVE_UP      | SCRL_LEFT    | SCROLL_DOWN |  DEL    |█
+            // █|     |     |     |     |     |     |███|     | SCRL_LEFT  | MOVE_UP      | SCRL_RIGHT    | SCROLL_DOWN |  DEL    |█
             // █|     |     |     |     |     |     |███|     | MOVE_LEFT   | MOVE_DOWN    | MOVE_RIGHT   | SCROLL_UP   |  BSPC   |█
             // █|     |     |     |     |     |     |███|     | LEFT_CLICK  | MIDDLE_CLICK | RIGHT_CLICK  |             | L_OSX   |█
             // ███████████████████|     |     |     |███|LEFT_CLICK|     |RIGHT_CLICK|██████████████████████████████████████████████
